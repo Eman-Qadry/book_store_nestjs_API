@@ -4,7 +4,7 @@ import { Get, Param,Post } from '@nestjs/common';
 @Controller('book')
 export class BookController {
     constructor(private readonly bookService: BookService) {}
-    // Define your endpoints here, e.g.:get
+   
     // @Get()
     @Get('all')
     async getAllBooks() {
