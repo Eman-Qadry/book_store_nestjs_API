@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int   @id @default(autoincrement())
+  name String 
+  email String  @unique
+  profileImage String
+  password String
+  role String @default("customer")
+  cart Cart?
+  wishlist Wishlist[]
+  orders Order[]
+   reviews   Review[]
+  createdAt DateTime  @default(now())
+}
+
+model Cart{
+    id        Int        @id @default(autoincrement())
+  userId    Int        @unique
+  user User @relation(fields:[userId],references:id)
+    items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+model CartItem {
+  id       Int     @id @default(autoincrement())
+  cartId   Int
+  bookId   Int
+  quantity Int     @default(1)
+  cart     Cart    @relation(fields: [cartId], references: [id])
+  book     Book    @relation(fields: [bookId], references: [id])
+}
+
+model Wishlist {
+  id      Int     @id @default(autoincrement())
+  userId  Int
+  bookId  Int
+  user    User    @relation(fields: [userId], references: [id])
+  book    Book    @relation(fields: [bookId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Author {
+  id     Int     @id @default(autoincrement())
+  name   String
+  books  Book[]
+}
+
+model Category {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  books  Book[]
+}
+
+model Book {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String?
+  price       Float
+  stock       Int         @default(0)
+  authorId    Int
+  categoryId  Int
+  author      Author      @relation(fields: [authorId], references: [id])
+  category    Category    @relation(fields: [categoryId], references: [id])
+  orderItems  OrderItem[]
+  cartItems   CartItem[]
+  wishlist    Wishlist[]
+  reviews     Review[]
+  createdAt   DateTime    @default(now())
+}
+
+model Order {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  user      User        @relation(fields: [userId], references: [id])
+  items     OrderItem[]
+  total     Float
+  createdAt DateTime    @default(now())
+}
+
+model OrderItem {
+  id       Int     @id @default(autoincrement())
+  orderId  Int
+  bookId   Int
+  quantity Int
+  book     Book    @relation(fields: [bookId], references: [id])
+  order    Order   @relation(fields: [orderId], references: [id])
+}
+
+
+model Review {
+  id      Int     @id @default(autoincrement())
+  userId  Int
+  bookId  Int
+  rating  Int     
+  comment String?
+  user    User    @relation(fields: [userId], references: [id])
+  book    Book    @relation(fields: [bookId], references: [id])
+  createdAt DateTime @default(now())
+}
