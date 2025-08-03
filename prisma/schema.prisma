@@ -57,12 +57,15 @@ model Wishlist {
 model Author {
   id     Int     @id @default(autoincrement())
   name   String
+  bio       String?    
+  imageUrl  String?
   books  Book[]
 }
 
 model Category {
   id     Int     @id @default(autoincrement())
   name   String  @unique
+ description String? 
   books  Book[]
 }
 
@@ -74,6 +77,10 @@ model Book {
   stock       Int         @default(0)
   authorId    Int
   categoryId  Int
+  imageUrl    String?
+  isFeatured   Boolean? @default(false)
+  soldCount    Int?     @default(0)
+  viewCount    Int      @default(0)
   author      Author      @relation(fields: [authorId], references: [id])
   category    Category    @relation(fields: [categoryId], references: [id])
   orderItems  OrderItem[]
