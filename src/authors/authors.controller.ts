@@ -2,8 +2,11 @@ import { Controller,Body,Get,Delete,Param,Patch,Post } from '@nestjs/common';
 import{AuthorsService} from './authors.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
+import{JwtAuthGuard}from '../auth/jwt-auth.guard'
+
 
 @Controller('authors')
+
 export class AuthorsController {
     constructor(private readonly authorsService: AuthorsService) {}
     
