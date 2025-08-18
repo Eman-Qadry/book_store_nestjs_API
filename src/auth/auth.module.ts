@@ -10,8 +10,8 @@ import { PrismaService } from 'prisma/prisma.service';
     imports: [
     PassportModule,
     JwtModule.register({
-      secret: 'JWT_SECRET', 
-      signOptions: { expiresIn: '1d' },
+      secret: process.env.JWT_SECRET ||  'default_secret_key', 
+    
     }),
   ],
   providers: [AuthService, JwtStrategy, PrismaService],
