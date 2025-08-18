@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+ 
 }
 
 datasource db {
@@ -18,7 +18,7 @@ model User{
   id Int   @id @default(autoincrement())
   name String 
   email String  @unique
-  profileImage String
+  profileImage String?
   password String
   role String @default("customer")
   cart Cart?
@@ -46,12 +46,20 @@ model CartItem {
 }
 
 model Wishlist {
-  id      Int     @id @default(autoincrement())
-  userId  Int
-  bookId  Int
-  user    User    @relation(fields: [userId], references: [id])
-  book    Book    @relation(fields: [bookId], references: [id])
-  createdAt DateTime @default(now())
+  id        Int              @id @default(autoincrement())
+  userId    Int               @unique
+  user      User             @relation(fields: [userId], references: [id])
+  items     WishlistItem[]
+  createdAt DateTime         @default(now())
+}
+
+model WishlistItem {
+  id         Int      @id @default(autoincrement())
+  wishlistId Int
+  bookId     Int
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id])
+  book       Book     @relation(fields: [bookId], references: [id])
+  createdAt  DateTime @default(now())
 }
 
 model Author {
@@ -75,6 +83,7 @@ model Book {
   description String?
   price       Float
   stock       Int         @default(0)
+  rating Float @default(0)
   authorId    Int
   categoryId  Int
   imageUrl    String?
@@ -85,7 +94,7 @@ model Book {
   category    Category    @relation(fields: [categoryId], references: [id])
   orderItems  OrderItem[]
   cartItems   CartItem[]
-  wishlist    Wishlist[]
+  wishlist    WishlistItem[]
   reviews     Review[]
   createdAt   DateTime    @default(now())
 }

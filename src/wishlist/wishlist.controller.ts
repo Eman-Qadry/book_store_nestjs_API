@@ -1,4 +1,40 @@
 import { Controller } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { WishlistService } from './wishlist.service';
+import { Get, Post, Delete, Param, Body } from '@nestjs/common';
+import { AddToWishlistDto } from './dto/add-to-wishlist.dto';
+import { CurrentUser } from '../../common/decorators/current-user.decorator';
 
 @Controller('wishlist')
-export class WishlistController {}
+export class WishlistController {
+    constructor(private readonly wishlistService: WishlistService) {}
+    
+    @Post()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('customer')
+   
+    addToWishlist(
+          @CurrentUser() user: any,
+        @Body() addToWishlistDto: AddToWishlistDto) {
+        return this.wishlistService.addToWishlist(user.userId, addToWishlistDto);
+    }
+    
+    @Get()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('customer')
+    getWishlist(  @CurrentUser() user: any,) {
+        return this.wishlistService.getWishlist(user.userId);
+    }
+    
+    @Delete(':bookId')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('customer')
+    removeFromWishlist(
+        @CurrentUser() user: any,
+        @Param('bookId') bookId: string) {
+        return this.wishlistService.removeFromWishlist(user.userId, +bookId);
+    }
+}

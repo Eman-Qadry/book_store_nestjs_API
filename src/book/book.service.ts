@@ -90,7 +90,6 @@ export class BookService {
       },
       where: {
         rating: {
-          not: null,
           gte: 4,
         },
       },

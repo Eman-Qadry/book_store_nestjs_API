@@ -17,9 +17,10 @@ import { OrdersController } from './orders/orders.controller';
 import { OrdersService } from './orders/orders.service';
 import { OrdersModule } from './orders/orders.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { PrismaModule } from 'prisma/prisma.module';
 
 @Module({
-  imports: [BookModule, AuthModule, UserModule, CategoriesModule, AuthorsModule, CartModule, WishlistModule, OrdersModule, ReviewsModule],
+  imports: [BookModule, AuthModule, UserModule, CategoriesModule, AuthorsModule, CartModule, WishlistModule, OrdersModule, ReviewsModule,PrismaModule],
   controllers: [AppController, CategoriesController, CartController, OrdersController],
   providers: [AppService,PrismaService, CategoriesService, CartService, OrdersService],
   exports: [PrismaService],

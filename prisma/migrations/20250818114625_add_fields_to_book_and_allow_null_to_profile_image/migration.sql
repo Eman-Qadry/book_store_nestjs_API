@@ -1,0 +1,8 @@
+-- AlterTable
+ALTER TABLE "Book" ADD COLUMN     "isFeatured" BOOLEAN DEFAULT false,
+ADD COLUMN     "rating" DOUBLE PRECISION NOT NULL DEFAULT 0,
+ADD COLUMN     "soldCount" INTEGER DEFAULT 0,
+ADD COLUMN     "viewCount" INTEGER NOT NULL DEFAULT 0;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "profileImage" DROP NOT NULL;
