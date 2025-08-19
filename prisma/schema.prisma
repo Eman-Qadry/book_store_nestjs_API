@@ -105,6 +105,7 @@ model Order {
   user      User        @relation(fields: [userId], references: [id])
   items     OrderItem[]
   total     Float
+  status      OrderStatus @default(PENDING)
   createdAt DateTime    @default(now())
 }
 
@@ -113,8 +114,16 @@ model OrderItem {
   orderId  Int
   bookId   Int
   quantity Int
+  price    Float
   book     Book    @relation(fields: [bookId], references: [id])
   order    Order   @relation(fields: [orderId], references: [id])
+}
+enum OrderStatus {
+  PENDING     
+  PAID         
+  SHIPPED     
+  COMPLETED    
+  CANCELLED    
 }
 
 
