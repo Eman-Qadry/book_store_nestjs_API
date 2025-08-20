@@ -78,7 +78,7 @@ npx prisma migrate dev
 # 5️⃣ Start server
 npm run start:dev
 
-🔑 Environment Variables
+## Environment Variables
 
 Create a .env file in the root:
 
@@ -91,7 +91,7 @@ STRIPE_SECRET_KEY="your_stripe_secret_key"
 CLIENT_URL='http:your_client_url'
 STRIPE_WEBHOOK_SECRET="your_stripe_webhook_secret"
 
-📌 API Endpoints
+## API Endpoints
 Auth
 
 POST /auth/register
@@ -130,12 +130,12 @@ PATCH /orders/:id/status (admin)
 
 POST /orders/webhook (Stripe)
 
-🧪 Testing
+ ## 🧪 Testing
 
 Use Postman or Insomnia with the provided API endpoints.
 Make sure to include your JWT token for protected routes.
 
-👨‍💻 Author
+ ## 👨‍💻 Author
 
 Developed by Eman Kadry
 
@@ -145,6 +145,6 @@ Developed by Eman Kadry
 
 🐙 GitHub (https://www.linkedin.com/in/eman-qadry-74581427b)
 
-📜 License
+## 📜 License
 
 MIT License – feel free to use and modify.
