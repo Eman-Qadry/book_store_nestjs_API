@@ -25,7 +25,9 @@ It supports user authentication, book management, shopping cart, wishlist, order
   - Order status updates (Pending, Paid, Shipped, Completed)  
 
 - ⭐ **Reviews**  
-  - Users can leave ratings & reviews on books  
+  - Users can leave ratings & reviews on books
+ 
+    
 
 
 ---
@@ -42,3 +44,102 @@ It supports user authentication, book management, shopping cart, wishlist, order
 
 ## 📂 Project Structure  
 
+src/
+│── auth/ # Authentication & Authorization
+│── books/ # Books CRUD & search
+│── authors/ # Authors management
+│── categories/ # Categories management
+│── cart/ # Shopping cart
+│── wishlist/ # Wishlist
+│── orders/ # Orders & Stripe integration
+│── reviews/ # Book reviews
+│── users/ # User management
+│── common/ # Shared utilities (decorators, guards, etc.)
+
+
+---
+
+## ⚙️ Installation  
+
+```bash
+# 1️⃣ Clone repo
+git clone https://github.com/your-username/bookstore-api.git
+
+# 2️⃣ Install dependencies
+cd bookstore-api
+npm install
+
+# 3️⃣ Setup environment
+cp .env.example .env
+
+# 4️⃣ Run migrations
+npx prisma migrate dev
+
+# 5️⃣ Start server
+npm run start:dev
+DATABASE_URL="postgresql://user:password@localhost:5432/bookstore"
+JWT_SECRET="your_jwt_secret"
+JWT_EXPIRATION="1d"
+JWT_REFRESH_EXPIRATION="21d"
+PORT='your_port_number'
+STRIPE_SECRET_KEY="your_stripe_secret_key"
+CLIENT_URL='http:your_client_url'
+STRIPE_WEBHOOK_SECRET="your_stripe_webhook_secret"
+
+📌 API Endpoints
+Auth
+
+POST /auth/register
+
+POST /auth/login
+
+Books
+
+GET /books
+
+GET /books/:id
+
+POST /books (admin)
+
+Cart
+
+POST /cart
+
+GET /cart
+
+DELETE /cart/:itemId
+
+Wishlist
+
+POST /wishlist
+
+GET /wishlist
+
+Orders
+
+POST /orders
+
+GET /orders
+
+PATCH /orders/:id/status (admin)
+
+POST /orders/webhook (Stripe)
+
+🧪 Testing
+
+Use Postman or Insomnia with the provided API endpoints.
+Make sure to include your JWT token for protected routes.
+
+👨‍💻 Author
+
+Developed by Eman Kadry
+
+🌐 Portfolio (https://my-portfolio-eman.vercel.app/)
+
+💼 LinkedIn (https://github.com/Eman-Qadry)
+
+🐙 GitHub (https://www.linkedin.com/in/eman-qadry-74581427b)
+
+📜 License
+
+MIT License – feel free to use and modify.
