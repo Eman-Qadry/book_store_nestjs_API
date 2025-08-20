@@ -43,7 +43,7 @@ It supports user authentication, book management, shopping cart, wishlist, order
 ---
 
 ## 📂 Project Structure  
-
+```bash
 src/
 │── auth/ # Authentication & Authorization
 │── books/ # Books CRUD & search
@@ -55,7 +55,7 @@ src/
 │── reviews/ # Book reviews
 │── users/ # User management
 │── common/ # Shared utilities (decorators, guards, etc.)
-
+```
 
 ---
 
@@ -78,10 +78,11 @@ npx prisma migrate dev
 # 5️⃣ Start server
 npm run start:dev
 
-## Environment Variables
+```
+## 🔑 Environment Variables
 
 Create a .env file in the root:
-
+```bash
 DATABASE_URL="postgresql://user:password@localhost:5432/bookstore"
 JWT_SECRET="your_jwt_secret"
 JWT_EXPIRATION="1d"
@@ -91,7 +92,11 @@ STRIPE_SECRET_KEY="your_stripe_secret_key"
 CLIENT_URL='http:your_client_url'
 STRIPE_WEBHOOK_SECRET="your_stripe_webhook_secret"
 
+
+ ```
+
 ## API Endpoints
+```bash
 Auth
 
 POST /auth/register
@@ -130,6 +135,7 @@ PATCH /orders/:id/status (admin)
 
 POST /orders/webhook (Stripe)
 
+```
  ## 🧪 Testing
 
 Use Postman or Insomnia with the provided API endpoints.
@@ -146,5 +152,6 @@ Developed by Eman Kadry
 🐙 GitHub (https://www.linkedin.com/in/eman-qadry-74581427b)
 
 ## 📜 License
+```bash
 
 MIT License – feel free to use and modify.
