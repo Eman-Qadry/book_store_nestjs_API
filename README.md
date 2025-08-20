@@ -77,6 +77,11 @@ npx prisma migrate dev
 
 # 5️⃣ Start server
 npm run start:dev
+
+🔑 Environment Variables
+
+Create a .env file in the root:
+
 DATABASE_URL="postgresql://user:password@localhost:5432/bookstore"
 JWT_SECRET="your_jwt_secret"
 JWT_EXPIRATION="1d"
