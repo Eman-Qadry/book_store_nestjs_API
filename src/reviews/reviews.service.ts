@@ -27,7 +27,7 @@ constructor(private readonly prisma: PrismaService) {}
         return this.prisma.review.update({
             where: { id },
             data: {
-                bookId: dto.bookId,
+           
                 userId: userId,
                 comment: dto.content,
                 rating: dto.rating,
